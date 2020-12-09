@@ -1,3 +1,9 @@
+# DESCRIPTION
+
+✅ inspired by https://github.com/iamj0ker/bypass-403
+✅ bypass-403 doesn't support checking a list of domains and I needed to make it a bit faster so forbiddenpass.py was created :)
+
+
 # INSTALLATION
 
 ```bash

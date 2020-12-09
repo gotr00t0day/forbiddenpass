@@ -6,6 +6,8 @@ git clone https://github.com/gotr00t0day/forbiddenpass.git
 
 cd forbiddenpass
 
+pip3 install -r requirements.txt
+
 python3 forbiddenpass.py -h
 
 ```

@@ -37,11 +37,11 @@ optional arguments:
  
  # EXAMPLE
  
- subdomains to check
+ domains to check
  ```
  python3 forbiddenpass.py -d check.txt
  ```
- subdomains to check with a path
+ domains to check with a path
  ```
  python3 forbiddenpass.py -d check.txt --path login
  ```

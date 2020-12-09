@@ -39,7 +39,7 @@ optional arguments:
  
  domains to check
  ```
- python3 forbiddenpass.py -d check.txt
+ python3 forbiddenpass.py -d domains.txt
  ```
  domains to check with a path
  ```

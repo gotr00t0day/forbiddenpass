@@ -2,7 +2,7 @@
 
 ```bash
 
-git clone https://github.com/gotr00t0day/forbiddenpass
+git clone https://github.com/gotr00t0day/forbiddenpass.git
 
 cd forbiddenpass
 

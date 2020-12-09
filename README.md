@@ -43,7 +43,7 @@ optional arguments:
  ```
  subdomains to check with a path
  ```
- python3 forbiddenpass.py -d check.txt -path login
+ python3 forbiddenpass.py -d check.txt --path login
  ```
  scan a single target
  ```
@@ -51,5 +51,5 @@ optional arguments:
  ```
  scan a single target with a path
  ```
-  python3 forbiddenpass.py -t https://site -path login
+  python3 forbiddenpass.py -t https://site --path login
  ````

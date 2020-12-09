@@ -43,7 +43,7 @@ optional arguments:
  ```
  domains to check with a path
  ```
- python3 forbiddenpass.py -d check.txt --path login
+ python3 forbiddenpass.py -d domains.txt --path login
  ```
  scan a single target
  ```

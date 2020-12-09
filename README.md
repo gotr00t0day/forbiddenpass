@@ -6,7 +6,7 @@ git clone https://github.com/gotr00t0day/forbiddenpass.git
 
 cd forbiddenpass
 
-python3 forbiddenpass.y -h
+python3 forbiddenpass.py -h
 
 ```
 

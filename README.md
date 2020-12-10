@@ -59,4 +59,4 @@ optional arguments:
 # DISCCLAIMER
 
 inspired by https://github.com/iamj0ker/bypass-403 </br>
-bypass-403 dooesn't support scanning multiple domains and I needed to speed things up a bit so forbiddenpass was created
+bypass-403 doesn't support scanning multiple domains and I needed to speed things up a bit so forbiddenpass was created

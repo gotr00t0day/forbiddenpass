@@ -55,3 +55,8 @@ optional arguments:
  ```
   python3 forbiddenpass.py -t https://site --path login
  ````
+
+# DISCCLAIMER
+
+inspired by https://github.com/iamj0ker/bypass-403
+bypass-403 dooesn't support scanning multiple domains and I needed to speed things up a bit so forbiddenpass was created

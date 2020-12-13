@@ -1,7 +1,6 @@
 # UPDATE 
 
-Thanks to Knowledge-Wisdom-Understanding (MrPMillz) for fixing the script, the header payloads now works perfectly<br/>
-and the script looks way better and cleaner.
+Thanks to Knowledge-Wisdom-Understanding (MrPMillz) for making the script cleaner and fixing the header payloads.
 
 # INSTALLATION
 

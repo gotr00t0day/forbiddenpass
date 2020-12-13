@@ -3,9 +3,3 @@
 //.
 ////
 /.//./
-/ -H X-Original-URL: 
-/ -H X-Custom-IP-Authorization: 127.0.0.1
-/ -H X-Forwarded-For: http://127.0.0.1
-/ -H X-Forwarded-For: 127.0.0.1:80
-/ -H X-rewrite-url: 
-

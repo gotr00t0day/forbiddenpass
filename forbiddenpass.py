@@ -95,11 +95,10 @@ def do_request(url: str, stream=False, path=None):
 
 
 def start():
+    bypass_list = word_list('bypasses.txt')
     if args.domains:
         if args.path:
             print(Fore.CYAN + "Checking domains to bypass....")
-
-            bypass_list = word_list('bypasses.txt')
             checklist = word_list(args.domains)
             for lines in checklist:
                 for bypass in bypass_list:
@@ -107,7 +106,6 @@ def start():
                     do_request(links, stream=True, path=args.path)
         else:
             print(Fore.CYAN + "Checking domains to bypass....")
-            bypass_list = word_list('bypasses.txt')
             checklist = word_list(args.domains)
             for lines in checklist:
                 for bypass in bypass_list:
@@ -116,14 +114,12 @@ def start():
     if args.target:
         if args.path:
             print(Fore.GREEN + f"Checking {args.target}...")
-            bypass_list = word_list('bypasses.txt')
             for bypass in bypass_list:
                 links = args.target + "/" + args.path + bypass
                 do_request(links, path=args.path)
 
         else:
             print(Fore.GREEN + f"Checking {args.target}...")
-            bypass_list = word_list('bypasses.txt')
             for bypass in bypass_list:
                 links = args.target + bypass
                 do_request(links)

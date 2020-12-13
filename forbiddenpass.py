@@ -54,6 +54,7 @@ def word_list(wordlist: str) -> list:
 def header_bypass(path=None):
     if path:
         headers = [
+            {'User-Agent': str(ua.chrome)},
             {'User-Agent': str(ua.chrome), 'X-Original-URL': path},
             {'User-Agent': str(ua.chrome), 'X-Custom-IP-Authorization': '127.0.0.1'},
             {'User-Agent': str(ua.chrome), 'X-Forwarded-For': 'http://127.0.0.1'},
@@ -62,6 +63,7 @@ def header_bypass(path=None):
         ]
     else:
         headers = [
+            {'User-Agent': str(ua.chrome)},
             {'User-Agent': str(ua.chrome), 'X-Original-URL': '/'},
             {'User-Agent': str(ua.chrome), 'X-Custom-IP-Authorization': '127.0.0.1'},
             {'User-Agent': str(ua.chrome), 'X-Forwarded-For': 'http://127.0.0.1'},

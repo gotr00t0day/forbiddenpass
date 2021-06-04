@@ -117,7 +117,7 @@ def main():
                 do_request(links)
 
 processes = []
-for _ in range(4):
+for _ in range(1):
     process = multiprocessing.Process(target=main)
     process.start()
     processes.append(process)

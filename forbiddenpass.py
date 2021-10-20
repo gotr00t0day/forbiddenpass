@@ -116,10 +116,11 @@ def main():
                 links = args.target + bypass
                 do_request(links)
 
-processes = []
-for _ in range(1):
-    process = multiprocessing.Process(target=main)
-    process.start()
-    processes.append(process)
-for process in processes:
-    process.join()
+if __name__ == '__main__':
+	processes = []
+	for _ in range(1):
+	 process = multiprocessing.Process(target=main)
+	 process.start()
+	 processes.append(process)
+	for process in processes:
+	 process.join()

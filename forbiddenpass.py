@@ -1,6 +1,6 @@
 from colorama import Fore, Back, Style
 from fake_useragent import UserAgent
-import multiprocessing
+import concurrent.futures
 import requests
 import argparse
 import sys
@@ -50,6 +50,8 @@ def word_list(wordlist: str) -> list:
         print(f"FileNotFoundError: {fnf_err}")
         sys.exit(1)
 
+wordlist = word_list("bypasses.txt")
+
 
 def header_bypass(path=None):
     headers = [
@@ -86,41 +88,39 @@ def do_request(url: str, stream=False, path=None):
         pass
 
 
-def main():
-    bypass_list = word_list('bypasses.txt')
+def main(wordlist):
     if args.domains:
         if args.path:
             print(Fore.CYAN + "Checking domains to bypass....")
             checklist = word_list(args.domains)
             for lines in checklist:
-                for bypass in bypass_list:
+                for bypass in wordlist:
                     links = lines + "/" + args.path + bypass
                     do_request(links, stream=True, path=args.path)
         else:
             print(Fore.CYAN + "Checking domains to bypass....")
             checklist = word_list(args.domains)
             for lines in checklist:
-                for bypass in bypass_list:
+                for bypass in wordlist:
                     links = lines + bypass
                     do_request(links, stream=True)
     if args.target:
         if args.path:
             print(Fore.GREEN + f"Checking {args.target}...")
-            for bypass in bypass_list:
+            for bypass in wordlist:
                 links = args.target + "/" + args.path + bypass
                 do_request(links, path=args.path)
 
         else:
             print(Fore.GREEN + f"Checking {args.target}...")
-            for bypass in bypass_list:
+            for bypass in wordlist:
                 links = args.target + bypass
                 do_request(links)
 
-if __name__ == '__main__':
-	processes = []
-	for _ in range(1):
-	 process = multiprocessing.Process(target=main)
-	 process.start()
-	 processes.append(process)
-	for process in processes:
-	 process.join()
+
+if __name__ == "__main__":
+    try:
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            executor.map(main, wordlist)
+    except KeyboardInterrupt as err:
+      sys.exit(0)

